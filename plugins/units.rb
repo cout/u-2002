@@ -6,8 +6,11 @@ class UnitsPlugin
   match /units\s+(.*?)\s+to\s+(.*)/,
         help: "units"
 
+  set help: "units <from> to <to> - convert units from <from> to <to>\n" + \
+            "E.g.: units 5in to cm\n" + \
+            "To convert temperature, use: tempF(45) to tempC"
+
   def execute(m, from, to)
-    p from, to
     input, output, error = Open3.popen3('/usr/bin/units -q --verbose')
     begin
       input.puts from

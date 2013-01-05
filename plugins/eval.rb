@@ -3,6 +3,8 @@ class EvalPlugin
 
   match /eval\s+(.*)/
 
+  set help: "eval <expression>"
+
   def execute(m, expr)
     # Make sure we have a valid expression (for security reasons), and
     # evaluate it if we do, otherwise return an error message

@@ -13,6 +13,9 @@ class WeatherPlugin
         method: :forecast,
         help: "Tells the forecast for the given location"
 
+  set help: "weather <where> - tells the current weather for the given location\n" + \
+            "forecast <where> - tells the forecast for the given location"
+
   def weather(m, where)
     m.reply(get_weather(where))
   end

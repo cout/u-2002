@@ -9,7 +9,12 @@ class ManPlugin
   match /proto(?:\s+)(\S+)(?:\s+)?(\S+)?/,
         method: :proto
 
+  set help: "whatis <name> [section]\n" + \
+            "proto <name> [section]\n"
+
   def whatis(m, name, section)
+    section ||= "3,2"
+
     cmd = [
       "whatis",
       Shellwords.escape(name),
@@ -23,6 +28,8 @@ class ManPlugin
   end
 
   def proto(m, name, section)
+    section ||= "3,2"
+
     cmd = [ "man" ]
     cmd << Shellwords.escape(section) if section
     cmd << Shellwords.escape(name)

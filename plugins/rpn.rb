@@ -3,6 +3,8 @@ class RpnPlugin
 
   match /rpn\s+(.*)/
 
+  set help: "rpn <expression>"
+
   def execute(m, expr)
     begin
       a = Array.new

@@ -1,6 +1,7 @@
 require 'cinch'
 require './plugins/console'
 require './plugins/reload'
+require './plugins/help'
 require './plugins/weather'
 require './plugins/man'
 require './plugins/units'
@@ -16,6 +17,7 @@ bot = Cinch::Bot.new do
     c.plugins.plugins = [
       ConsolePlugin,
       ReloadPlugin,
+      HelpPlugin,
       WeatherPlugin,
       ManPlugin,
       UnitsPlugin,
