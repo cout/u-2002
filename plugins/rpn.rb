@@ -4,7 +4,6 @@ class RpnPlugin
   match /rpn\s+(.*)/
 
   def execute(m, expr)
-    p expr
     begin
       a = Array.new
       expr.untaint
