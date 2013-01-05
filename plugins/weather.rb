@@ -5,13 +5,23 @@ require 'rexml/document'
 class WeatherPlugin
   include Cinch::Plugin
 
-  match /weather (.*)/
+  match /weather (.*)/,
+        method: :weather,
+        help: "Tells the current weather for the given location"
 
-  def execute(m, where)
-    m.reply(weather(where))
+  match /forecast (.*)/,
+        method: :forecast,
+        help: "Tells the forecast for the given location"
+
+  def weather(m, where)
+    m.reply(get_weather(where))
   end
 
-  def weather(where)
+  def forecast(m, where)
+    m.reply(get_forecast(where))
+  end
+
+  def get_weather(where)
     bot.loggers.info "Getting weather for #{where}"
     file = open("http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query=#{where}")
     doc = REXML::Document.new(file)
@@ -43,6 +53,16 @@ class WeatherPlugin
     weather << " with gusts up to #{wind_gust_mph} mph" if wind_gust_mph
 
     return weather
+  end
+
+  def get_forecast(where)
+    # file = open("http://api.wunderground.com/auto/wui/geo/ForecastXML/index.xml?query=#{where}")
+    # doc = REXML::Document.new(file)
+
+    # e = doc.root.elements
+    # forecast = e['simpleforecast']
+
+    return "I haven't implemented forecast yet"
   end
 end
 
