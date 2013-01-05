@@ -4,6 +4,7 @@ require './plugins/reload'
 require './plugins/weather'
 require './plugins/man'
 require './plugins/units'
+require './plugins/rpn'
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -17,6 +18,7 @@ bot = Cinch::Bot.new do
       WeatherPlugin,
       ManPlugin,
       UnitsPlugin,
+      RpnPlugin,
     ]
     c.plugins.prefix = '.'
   end
