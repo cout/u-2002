@@ -2,7 +2,9 @@ require 'cgi'
 require 'open-uri'
 require 'rexml/document'
 
-class WeatherPlugin
+module Plugins
+
+class Weather
   include Cinch::Plugin
 
   match /weather (.*)/,
@@ -67,5 +69,7 @@ class WeatherPlugin
 
     return "I haven't implemented forecast yet"
   end
+end
+
 end
 

@@ -1,6 +1,8 @@
 require 'shellwords'
 
-class ManPlugin
+module Plugins
+
+class Man
   include Cinch::Plugin
 
   match /whatis(?:\s+)(\S+)(?:\s+)?(\S+)?/,
@@ -54,5 +56,7 @@ class ManPlugin
   def unformat(line)
     return line.gsub(/.\010/, '')
   end
+end
+
 end
 

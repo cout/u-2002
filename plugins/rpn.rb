@@ -1,4 +1,6 @@
-class RpnPlugin
+module Plugins
+
+class Rpn
   include Cinch::Plugin
 
   match /rpn\s+(.*)/
@@ -30,5 +32,7 @@ class RpnPlugin
       m.reply(detail.message)
     end
   end
+end
+
 end
 

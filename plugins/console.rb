@@ -37,7 +37,7 @@ module Cinch::Plugin
 
   def console_plugin
     if not @console_plugin then
-      @console_plugin = bot.plugins.find { |plugin| plugin.class == ConsolePlugin }
+      @console_plugin = bot.plugins.find { |plugin| plugin.class == ::Plugins::Console }
     end
     return @console_plugin
   end
@@ -59,7 +59,9 @@ module Cinch::Plugin
   end
 end
 
-class ConsolePlugin
+module Plugins
+
+class Console
   include Cinch::Plugin
 
   def initialize(bot)
@@ -91,5 +93,7 @@ class ConsolePlugin
 
   def execute(*args)
   end
+end
+
 end
 

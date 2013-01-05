@@ -1,4 +1,6 @@
-class ReloadPlugin
+module Plugins
+
+class Reload
   include Cinch::Plugin
 
   console_command /reload/
@@ -29,5 +31,7 @@ class ReloadPlugin
       bot.loggers.error "Unable to reload #{plugin}: #{e}"
     end
   end
+end
+
 end
 

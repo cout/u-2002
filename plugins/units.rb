@@ -1,6 +1,8 @@
 require 'open3'
 
-class UnitsPlugin
+module Plugins
+
+class Units
   include Cinch::Plugin
 
   match /units\s+(.*?)\s+to\s+(.*)/,
@@ -22,5 +24,7 @@ class UnitsPlugin
       output.close
     end
   end
+end
+
 end
 

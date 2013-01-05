@@ -1,4 +1,6 @@
-class HelpPlugin
+module Plugins
+
+class Help
   include Cinch::Plugin
 
   match /help$/
@@ -16,5 +18,7 @@ class HelpPlugin
   def topic(plugin)
     return plugin.class.plugin_name
   end
+end
+
 end
 

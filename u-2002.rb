@@ -15,14 +15,14 @@ bot = Cinch::Bot.new do
     c.nick = 'U-2002'
     c.channels = [ '#alt-255' ]
     c.plugins.plugins = [
-      ConsolePlugin,
-      ReloadPlugin,
-      HelpPlugin,
-      WeatherPlugin,
-      ManPlugin,
-      UnitsPlugin,
-      RpnPlugin,
-      EvalPlugin,
+      Plugins::Console,
+      Plugins::Reload,
+      Plugins::Help,
+      Plugins::Weather,
+      Plugins::Man,
+      Plugins::Units,
+      Plugins::Rpn,
+      Plugins::Eval,
     ]
     c.plugins.prefix = '.'
   end

@@ -1,4 +1,6 @@
-class EvalPlugin
+module Plugins
+
+class Eval
   include Cinch::Plugin
 
   match /eval\s+(.*)/
@@ -19,5 +21,7 @@ class EvalPlugin
        m.reply("Result: Error (#{$!.message})")
     end
   end
+end
+
 end
 
