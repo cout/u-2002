@@ -16,6 +16,7 @@ class Man
 
   def whatis(m, name, section)
     section ||= "3,2"
+    bot.loggers.info "Getting whatis for #{name} in section[s] #{section}"
 
     cmd = [
       "whatis",
@@ -31,6 +32,7 @@ class Man
 
   def proto(m, name, section)
     section ||= "3,2"
+    bot.loggers.info "Getting proto for #{name} in section[s] #{section}"
 
     cmd = [ "man" ]
     cmd << Shellwords.escape(section) if section
