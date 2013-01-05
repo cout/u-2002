@@ -1,4 +1,5 @@
 require 'cinch'
+require './plugins/console'
 require './plugins/reload'
 
 bot = Cinch::Bot.new do
@@ -7,7 +8,7 @@ bot = Cinch::Bot.new do
     c.server = 'localhost'
     c.nick = 'U-2002'
     c.channels = [ '#alt-255' ]
-    c.plugins.plugins = [ ReloadPlugin ]
+    c.plugins.plugins = [ ConsolePlugin, ReloadPlugin ]
     c.plugins.prefix = '.'
   end
 end

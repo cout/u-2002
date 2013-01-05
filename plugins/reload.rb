@@ -1,14 +1,16 @@
 class ReloadPlugin
   include Cinch::Plugin
 
-  match /reload/
+  console_command /reload/
 
   def execute(m)
     reload_all_plugins
   end
 
   def reload_all_plugins
-    bot.plugins.each do |plugin|
+    plugins = bot.plugins.dup
+    plugins.each do |plugin|
+      bot.loggers.info "Reloading #{plugin}"
       reload_plugin(plugin)
     end
   end
