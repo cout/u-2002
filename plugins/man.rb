@@ -5,10 +5,10 @@ module Plugins
 class Man
   include Cinch::Plugin
 
-  match /whatis(?:\s+)(\S+)(?:\s+)?(\S+)?/,
+  match /whatis(?:\s+)(\S+)(?:\s+(\S+))?/,
         method: :whatis
 
-  match /proto(?:\s+)(\S+)(?:\s+)?(\S+)?/,
+  match /proto(?:\s+)(\S+)(?:\s+(\S+))?/,
         method: :proto
 
   set help: "whatis <name> [section]\n" + \
@@ -30,6 +30,7 @@ class Man
   end
 
   def proto(m, name, section)
+  p section
     section ||= "3,2"
     bot.loggers.info "Getting proto for #{name} in section[s] #{section}"
 
