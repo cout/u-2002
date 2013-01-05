@@ -15,7 +15,6 @@ class Man
             "proto <name> [section]\n"
 
   def whatis(m, name, section)
-    section ||= "3,2"
     bot.loggers.info "Getting whatis for #{name} in section[s] #{section}"
 
     cmd = [
@@ -35,7 +34,10 @@ class Man
     bot.loggers.info "Getting proto for #{name} in section[s] #{section}"
 
     cmd = [ "man" ]
-    cmd << Shellwords.escape(section) if section
+    if section then
+      cmd << "-S"
+      cmd << Shellwords.escape(section)
+    end
     cmd << Shellwords.escape(name)
 
     synopsis = false
@@ -53,6 +55,8 @@ class Man
         end
       end                                                                  
     end
+
+    m.reply "no prototype for #{name} found in section[s] #{section}"
   end
 
   def unformat(line)
