@@ -2,7 +2,7 @@ require 'cinch'
 require './plugins/console'
 require './plugins/reload'
 require './plugins/weather'
-require './plugins/whatis'
+require './plugins/man'
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -14,7 +14,7 @@ bot = Cinch::Bot.new do
       ConsolePlugin,
       ReloadPlugin,
       WeatherPlugin,
-      WhatisPlugin,
+      ManPlugin,
     ]
     c.plugins.prefix = '.'
   end
