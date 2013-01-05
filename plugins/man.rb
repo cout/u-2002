@@ -30,10 +30,23 @@ class Man
   end
 
   def proto(m, name, section)
-  p section
     section ||= "3,2"
     bot.loggers.info "Getting proto for #{name} in section[s] #{section}"
 
+    sections = section.split ','
+
+    sections.each do |section|
+      proto = proto_for(name, section)
+      if proto then
+        m.reply(proto)
+        return
+      end
+    end
+
+    m.reply "no prototype for #{name} found in section[s] #{section}"
+  end
+
+  def proto_for(name, section)
     cmd = [ "man" ]
     if section then
       cmd << "-S"
@@ -51,13 +64,12 @@ class Man
         synopsis = false                                                   
       when /^\s*(.*#{name}\s*\(.*\))/                                      
         if synopsis then
-          m.reply($1)
-          return
+          return $1
         end
       end                                                                  
     end
 
-    m.reply "no prototype for #{name} found in section[s] #{section}"
+    return nil
   end
 
   def unformat(line)
