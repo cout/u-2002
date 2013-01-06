@@ -7,6 +7,7 @@ require './plugins/man'
 require './plugins/units'
 require './plugins/rpn'
 require './plugins/eval'
+require './plugins/coin'
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -23,6 +24,7 @@ bot = Cinch::Bot.new do
       Plugins::Units,
       Plugins::Rpn,
       Plugins::Eval,
+      Plugins::Coin,
     ]
     c.plugins.prefix = '.'
   end
