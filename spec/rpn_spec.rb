@@ -10,15 +10,15 @@ describe Plugins::Rpn do
 
   describe :match do
     it 'should give the whole expression' do
-      match = matcher.pattern.match "rpn 1"
-      match[0].should eq 'rpn 1'
-      match[1].should eq '1'
+      expect_match(
+          'rpn 1',
+          1 => '1')
     end
 
     it 'should give the whole expression even when there are spaces' do
-      match = matcher.pattern.match "rpn 1 1 +"
-      match[0].should eq 'rpn 1 1 +'
-      match[1].should eq '1 1 +'
+      expect_match(
+          'rpn 1 1 +',
+          1 => '1 1 +')
     end
   end
 

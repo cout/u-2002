@@ -10,15 +10,15 @@ describe Plugins::Eval do
 
   describe :match do
     it 'should give the whole expression' do
-      match = matcher.pattern.match "eval 1+1"
-      match[0].should eq 'eval 1+1'
-      match[1].should eq '1+1'
+      expect_match(
+          'eval 1+1',
+          1 => '1+1')
     end
 
     it 'should give the whole expression even when there are spaces' do
-      match = matcher.pattern.match "eval 1 + 1"
-      match[0].should eq 'eval 1 + 1'
-      match[1].should eq '1 + 1'
+      expect_match(
+          'eval 1 + 1',
+          1 => '1 + 1')
     end
   end
 
