@@ -19,7 +19,8 @@ class Reload
 
   def reload_plugin(plugin)
     begin
-      file, line = plugin.method(:execute).source_location
+      method_name = (plugin.class.matchers + plugin.class.listeners + plugin.class.hooks.values).first.method
+      file, line = plugin.method(method_name).source_location
       return if not File.exists?(file)
       bot.plugins.unregister_plugin(plugin)
       begin
