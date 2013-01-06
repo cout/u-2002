@@ -1,4 +1,5 @@
 require 'cinch'
+
 require './plugins/console'
 require './plugins/reload'
 require './plugins/help'
@@ -8,6 +9,15 @@ require './plugins/units'
 require './plugins/rpn'
 require './plugins/eval'
 require './plugins/coin'
+
+require "cinch/plugins/yamlscore"
+
+class Cinch::Plugins::YamlScore
+  set help: "scores - display all scores\n" + \
+            "score <user> - show score for <user>\n" + \
+            "user +1 - increase score for user\n" + \
+            "etc."
+end
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -25,6 +35,7 @@ bot = Cinch::Bot.new do
       Plugins::Rpn,
       Plugins::Eval,
       Plugins::Coin,
+      Cinch::Plugins::YamlScore,
     ]
     c.plugins.prefix = '.'
   end
