@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'mock_bot'
 require './plugins/coin'
 
@@ -26,13 +27,13 @@ describe Plugins::Coin do
   describe :execute do
     it 'should reply with heads if the flip is 0' do
       plugin.stub!(:rand) { 0 }
-      message.should_receive(:reply).with('Flip was heads')
+      expect_reply 'Flip was heads'
       plugin.execute(message, nil, nil)
     end
 
     it 'should reply with tails if the flip is 1' do
       plugin.stub!(:rand) { 1 }
-      message.should_receive(:reply).with('Flip was tails')
+      expect_reply 'Flip was tails'
       plugin.execute(message, nil, nil)
     end
   end

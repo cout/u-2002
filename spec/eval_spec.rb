@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'mock_bot'
 require './plugins/eval'
 
@@ -23,7 +24,7 @@ describe Plugins::Eval do
 
   describe :execute do
     it 'should evaluate the expression' do
-      message.should_receive(:reply).with('Result: 2')
+      expect_reply 'Result: 2'
       plugin.execute(message, '1+1')
     end
   end
