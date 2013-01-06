@@ -25,13 +25,13 @@ describe Plugins::Coin do
 
   describe :execute do
     it 'should reply with heads if the flip is 0' do
-      Kernel.stub(:rand) { 0 }
+      plugin.stub!(:rand) { 0 }
       message.should_receive(:reply).with('Flip was heads')
       plugin.execute(message, nil, nil)
     end
 
     it 'should reply with tails if the flip is 1' do
-      Kernel.stub(:rand) { 1 }
+      plugin.stub!(:rand) { 1 }
       message.should_receive(:reply).with('Flip was tails')
       plugin.execute(message, nil, nil)
     end
