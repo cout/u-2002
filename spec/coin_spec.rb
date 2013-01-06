@@ -10,17 +10,17 @@ describe Plugins::Coin do
 
   describe :match do
     it 'should give nil heads and tails if the string is "coin"' do
-      match = matcher.pattern.match "coin"
-      match[0].should eq 'coin'
-      match[1].should eq nil
-      match[2].should eq nil
+      expect_match(
+          'coin',
+          1 => nil,
+          2 => nil)
     end
 
     it 'should give non-nil heads and tails if they are specified' do
-      match = matcher.pattern.match "coin heads ruby rocks tails ruby is awesome"
-      match[0].should eq 'coin heads ruby rocks tails ruby is awesome'
-      match[1].should eq 'ruby rocks'
-      match[2].should eq 'ruby is awesome'
+      expect_match(
+          'coin heads ruby rocks tails ruby is awesome',
+          1 => 'ruby rocks',
+          2 => 'ruby is awesome')
     end
   end
 
