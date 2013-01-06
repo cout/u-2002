@@ -3,9 +3,9 @@ require 'cinch/pattern'
 require 'cinch/plugin'
 require 'cinch/handler'
 require 'cinch/handler_list'
+require 'cinch/logger_list'
 require './plugins/coin'
 require 'ostruct'
-require 'logger'
 
 class MockBot
   attr_reader :config
@@ -15,7 +15,7 @@ class MockBot
   def initialize
     @config = OpenStruct.new
     @config.plugins = OpenStruct.new
-    @loggers = Logger.new(File.open('/dev/null', 'w'))
+    @loggers = Cinch::LoggerList.new
     @handlers = Cinch::HandlerList.new
   end
 end
