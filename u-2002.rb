@@ -22,7 +22,7 @@ class Cinch::Plugins::YamlScore
 end
 
 class Cinch::Plugins::UrbanDictionary
-  set help" urban <word> - look up <word> in the Urban Dictionary"
+  set help: "urban <word> - look up <word> in the Urban Dictionary"
 end
 
 bot = Cinch::Bot.new do
