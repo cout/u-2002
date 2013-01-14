@@ -77,21 +77,21 @@ class Weather
     end
   end
 
-  def find_location(where)
+  def find_location(where, nick)
     if @locations[where] then
       where = @locations[where]
-    elsif where == '' and @locations[m.user.nick] then
-      where = @locations[m.user.nick]
+    elsif where == '' and @locations[nick] then
+      where = @locations[nick]
     end
   end
 
   def weather(m, where)
-    where = find_location(where)
+    where = find_location(where, m.user.nick)
     m.reply(get_weather(where))
   end
 
   def forecast(m, where)
-    where = find_location(where)
+    where = find_location(where, m.user.nick)
     m.reply(get_forecast(where))
   end
 
