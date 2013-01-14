@@ -83,6 +83,7 @@ class Weather
     elsif where == '' and @locations[nick] then
       where = @locations[nick]
     end
+    return where
   end
 
   def weather(m, where)
@@ -108,7 +109,7 @@ class Weather
     temp = e['temperature_string'].text
     heat_index = e['heat_index_string'].text
     humidity = e['relative_humidity'].text
-    wind_dir = e['wind_dir'].text.downcase
+    wind_dir = (e['wind_dir'].text || '').downcase
     wind_mph = e['wind_mph'].text
     wind_gust_mph = e['wind_gust_mph'].text
 
