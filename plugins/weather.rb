@@ -98,7 +98,7 @@ class Weather
 
   def get_weather(where)
     bot.loggers.info "Getting weather for #{where}"
-    file = open("http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query=#{where}")
+    file = open("http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query=#{CGI.escape(where)}")
     doc = REXML::Document.new(file)
 
     e = doc.root.elements
@@ -131,7 +131,7 @@ class Weather
   end
 
   def get_forecast(where)
-    # file = open("http://api.wunderground.com/auto/wui/geo/ForecastXML/index.xml?query=#{where}")
+    # file = open("http://api.wunderground.com/auto/wui/geo/ForecastXML/index.xml?query=#{CGI.escape(wherer}")
     # doc = REXML::Document.new(file)
 
     # e = doc.root.elements
