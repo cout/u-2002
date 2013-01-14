@@ -7,11 +7,11 @@ module Plugins
 class Weather
   include Cinch::Plugin
 
-  match /weather\s*(.*)/,
+  match /weather\s*(.*)/i,
         method: :weather,
         help: "Tells the current weather for the given location"
 
-  match /forecast\s*(.*)/,
+  match /forecast\s*(.*)/i,
         method: :forecast,
         help: "Tells the forecast for the given location"
 
@@ -26,6 +26,10 @@ class Weather
   match /where does (.*?) live/i,
         method: :show_location,
         help: "Set's your location"
+
+  match /metar\s+(.*)/i,
+        method: :metar,
+        help: "Get the raw metar data for the given airport"
 
   set help: "weather <where> - tells the current weather for the given location\n" + \
             "forecast <where> - tells the forecast for the given location\n" + \
@@ -96,6 +100,10 @@ class Weather
     m.reply(get_forecast(where))
   end
 
+  def metar(m, where)
+    m.reply(get_metar(where))
+  end
+
   def get_weather(where)
     bot.loggers.info "Getting weather for #{where}"
     file = open("http://api.wunderground.com/auto/wui/geo/WXCurrentObXML/index.xml?query=#{CGI.escape(where)}")
@@ -138,6 +146,13 @@ class Weather
     # forecast = e['simpleforecast']
 
     return "I haven't implemented forecast yet"
+  end
+
+  def get_metar(where)
+    bot.loggers.info "Getting METAR for #{where}"
+    file = open("http://w1.weather.gov/data/METAR/#{CGI.escape(where)}.1.txt")
+    results = file.read.split("\n")
+    return results[3]
   end
 end
 
