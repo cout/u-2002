@@ -17,5 +17,9 @@ class MockBot
     @loggers = Cinch::LoggerList.new
     @handlers = Cinch::HandlerList.new
   end
+
+  def synchronize(*args)
+    yield
+  end
 end
 

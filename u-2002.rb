@@ -9,6 +9,7 @@ require './plugins/units'
 require './plugins/rpn'
 require './plugins/eval'
 require './plugins/coin'
+require './plugins/score'
 
 require "cinch/plugins/basic_ctcp"
 require "cinch/plugins/yamlscore"
@@ -41,8 +42,8 @@ bot = Cinch::Bot.new do
       Plugins::Rpn,
       Plugins::Eval,
       Plugins::Coin,
+      Plugins::Score,
       Cinch::Plugins::BasicCTCP,
-      Cinch::Plugins::YamlScore,
       Cinch::Plugins::UrbanDictionary,
     ]
     c.plugins.prefix = '.'
