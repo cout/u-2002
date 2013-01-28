@@ -6,6 +6,8 @@ module Plugins
 class Score
   include Cinch::Plugin
 
+  attr_reader :scores
+
   def initialize(bot, args={})
     super(bot)
 
@@ -33,8 +35,15 @@ class Score
   end
 
   def update_score(nick, delta)
-    @scores[nick] ||= 0
-    @scores[nick] += delta
+    if @scores[nick] then
+      @scores[nick] += delta
+    elsif prevnick = @scores.keys.find { |n| nick.downcase == n.downcase } then
+      @scores[nick] = @scores[prevnick]
+      @scores[nick] += delta
+      @scores.delete(prevnick)
+    else
+      @scores[nick] = delta
+    end
     save_scores()
   end
 

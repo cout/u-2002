@@ -126,21 +126,37 @@ describe Plugins::Score do
       plugin.change(message, 'Nick', '+1')
     end
 
-    # it 'should treat scores for the same user with different capitalization as the same user' do
-    #   message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
-    #   message.stub!(:channel) { channel }
-    #   bot.stub!(:nick) { 'botnick' }
-    #   channel.users = [ 'nick' ]
+    it 'should treat scores for the same user with different capitalization as the same user' do
+      message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+      message.stub!(:channel) { channel }
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'nick' ]
 
-    #   expect_reply 'othernick(0) gave +1 for nick(1)'
-    #   plugin.change(message, 'nick', '+1')
+      expect_reply 'othernick(0) gave +1 for nick(1)'
+      plugin.change(message, 'nick', '+1')
 
-    #   bot.stub!(:nick) { 'botnick' }
-    #   channel.users = [ 'Nick' ]
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'Nick' ]
 
-    #   expect_reply 'othernick(0) gave +1 for nick(1)'
-    #   plugin.change(message, 'nick', '+1')
-    # end
+      expect_reply 'othernick(0) gave +1 for Nick(2)'
+      plugin.change(message, 'Nick', '+1')
+    end
+
+    it 'should update the database with the new capitalization when it changes' do
+      message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+      message.stub!(:channel) { channel }
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'nick' ]
+
+      expect_reply 'othernick(0) gave +1 for nick(1)'
+      plugin.change(message, 'nick', '+1')
+
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'Nick' ]
+
+      expect_reply 'othernick(0) gave +1 for nick(2)'
+      plugin.change(message, 'nick', '+1')
+    end
   end
 end
 
