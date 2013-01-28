@@ -75,6 +75,36 @@ describe Plugins::Score do
       expect_reply 'othernick(0) gave +1 for nick(1)'
       plugin.change(message, 'nick', '+1')
     end
+
+    it 'should subtract one to the score if -1 is passed in' do
+      message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+      message.stub!(:channel) { channel }
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'nick' ]
+
+      expect_reply 'othernick(0) gave -1 for nick(-1)'
+      plugin.change(message, 'nick', '-1')
+    end
+
+    it 'should add one to the score if ++ is passed in' do
+      message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+      message.stub!(:channel) { channel }
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'nick' ]
+
+      expect_reply 'othernick(0) gave +1 for nick(1)'
+      plugin.change(message, 'nick', '++')
+    end
+
+    it 'should subtract one to the score if -- is passed in' do
+      message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+      message.stub!(:channel) { channel }
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'nick' ]
+
+      expect_reply 'othernick(0) gave -1 for nick(-1)'
+      plugin.change(message, 'nick', '--')
+    end
   end
 end
 
