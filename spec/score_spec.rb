@@ -105,6 +105,42 @@ describe Plugins::Score do
       expect_reply 'othernick(0) gave -1 for nick(-1)'
       plugin.change(message, 'nick', '--')
     end
+
+    it 'should give an error if the nick is not in the channel' do
+      message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+      message.stub!(:channel) { channel }
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'nick' ]
+
+      expect_reply 'Foo is not here'
+      plugin.change(message, 'Foo', '+1')
+    end
+
+    it 'should allow scoring for a user without the same capitalization as the nick' do
+      message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+      message.stub!(:channel) { channel }
+      bot.stub!(:nick) { 'botnick' }
+      channel.users = [ 'nick' ]
+
+      expect_reply 'othernick(0) gave +1 for Nick(1)'
+      plugin.change(message, 'Nick', '+1')
+    end
+
+    # it 'should treat scores for the same user with different capitalization as the same user' do
+    #   message.stub!(:user) { OpenStruct.new(:nick => 'othernick') }
+    #   message.stub!(:channel) { channel }
+    #   bot.stub!(:nick) { 'botnick' }
+    #   channel.users = [ 'nick' ]
+
+    #   expect_reply 'othernick(0) gave +1 for nick(1)'
+    #   plugin.change(message, 'nick', '+1')
+
+    #   bot.stub!(:nick) { 'botnick' }
+    #   channel.users = [ 'Nick' ]
+
+    #   expect_reply 'othernick(0) gave +1 for nick(1)'
+    #   plugin.change(message, 'nick', '+1')
+    # end
   end
 end
 

@@ -7,11 +7,11 @@ class MockChannel
   end
 
   def users=(users)
-    @users = users.dup
+    @users = users.map { |user| user.downcase }
   end
 
   def has_user?(user)
-    return @users.include?(user)
+    return @users.include?(user.downcase)
   end
 end
 
