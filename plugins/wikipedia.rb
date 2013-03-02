@@ -10,6 +10,7 @@ class Wikipedia
   include Cinch::Plugin
 
   match /wikipedia\s+(.*)/
+  match /wp\s+(.*)/
 
   set help: "wikipedia <page> - display wikipedia summary"
 
