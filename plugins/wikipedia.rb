@@ -38,8 +38,13 @@ class Wikipedia
     file = open("http://lookup.dbpedia.org/api/search.asmx/KeywordSearch?MaxHits=1&QueryString=#{CGI.escape(page)}")
     s = file.read
     d = REXML::Document.new(s)
-    summary = REXML::XPath.match(d, '//Description')[0].text
-    return summary
+    summaries = REXML::XPath.match(d, '//Description')
+    if summaries.length == 0 then
+      return "#{page} not found"
+    else
+      summary = summaries[0].text
+      return summary
+    end
   end
 
 end
