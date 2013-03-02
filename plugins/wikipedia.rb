@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'json'
-# require 'nokogiri'
+require 'nokogiri'
 require 'rexml/document'
 require 'cgi'
 
@@ -35,6 +35,9 @@ class Wikipedia
   # end
 
   def wikipedia_summary(page)
+    # TODO: I tried to use Nokogiri to do the xpath, but
+    # it didn't work, so here's a weird mixture of rexml
+    # and nokogiri...
     file = open("http://lookup.dbpedia.org/api/search.asmx/KeywordSearch?MaxHits=1&QueryString=#{CGI.escape(page)}")
     s = file.read
     d = REXML::Document.new(s)
@@ -42,7 +45,7 @@ class Wikipedia
     if summaries.length == 0 then
       return "#{page} not found"
     else
-      summary = summaries[0].text
+      summary = Nokogiri::HTML(summaries[0].text).text
       return summary
     end
   end
