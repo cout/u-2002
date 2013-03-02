@@ -15,7 +15,8 @@ class Wikipedia
   set help: "wikipedia <page> - display wikipedia summary"
 
   def execute(m, page)
-    m.reply(wikipedia_summary(page))
+    s = wikipedia_summary(page)
+    m.reply(s)
   end
 
   # def wikipedia_summary(page)
@@ -42,7 +43,7 @@ class Wikipedia
     s = file.read
     d = REXML::Document.new(s)
     summaries = REXML::XPath.match(d, '//Description')
-    if summaries.length == 0 then
+    if summaries.length == 0 or summaries[0].text == nil then
       return "#{page} not found"
     else
       summary = Nokogiri::HTML(summaries[0].text).text
