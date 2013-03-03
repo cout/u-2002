@@ -11,6 +11,7 @@ require './plugins/eval'
 require './plugins/coin'
 require './plugins/score'
 require './plugins/wikipedia'
+require './plugins/conservapedia'
 
 require "cinch/plugins/basic_ctcp"
 require "cinch/plugins/yamlscore"
@@ -45,6 +46,7 @@ bot = Cinch::Bot.new do
       Plugins::Coin,
       Plugins::Score,
       Plugins::Wikipedia,
+      Plugins::Conservapedia,
       Cinch::Plugins::BasicCTCP,
       Cinch::Plugins::UrbanDictionary,
     ]
