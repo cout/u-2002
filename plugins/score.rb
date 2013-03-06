@@ -6,6 +6,11 @@ module Plugins
 class Score
   include Cinch::Plugin
 
+  set help: "scores - display all scores\n" + \
+            "score <user> - show score for <user>\n" + \
+            "user +1 - increase score for user\n" + \
+            "etc."
+
   attr_reader :scores
 
   def initialize(bot, args={})

@@ -18,13 +18,6 @@ require "cinch/plugins/basic_ctcp"
 require "cinch/plugins/yamlscore"
 require "cinch/plugins/urbandictionary"
 
-class Cinch::Plugins::YamlScore
-  set help: "scores - display all scores\n" + \
-            "score <user> - show score for <user>\n" + \
-            "user +1 - increase score for user\n" + \
-            "etc."
-end
-
 class Cinch::Plugins::UrbanDictionary
   set help: "urban <word> - look up <word> in the Urban Dictionary"
 end
