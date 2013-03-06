@@ -13,6 +13,7 @@ require './plugins/score'
 require './plugins/wikipedia'
 require './plugins/conservapedia'
 require './plugins/slashtitle'
+require './plugins/protolol'
 
 require "cinch/plugins/basic_ctcp"
 require "cinch/plugins/yamlscore"
@@ -42,6 +43,7 @@ bot = Cinch::Bot.new do
       Plugins::Wikipedia,
       Plugins::Conservapedia,
       Plugins::Slashtitle,
+      Plugins::Protolol,
       Cinch::Plugins::BasicCTCP,
       Cinch::Plugins::UrbanDictionary,
     ]
