@@ -4,6 +4,7 @@ require './plugins/console'
 require './plugins/reload'
 require './plugins/help'
 require './plugins/weather'
+require './plugins/spaceweather'
 require './plugins/man'
 require './plugins/units'
 require './plugins/rpn'
@@ -34,6 +35,7 @@ bot = Cinch::Bot.new do
       Plugins::Reload,
       Plugins::Help,
       Plugins::Weather,
+      Plugins::SpaceWeather,
       Plugins::Man,
       Plugins::Units,
       Plugins::Rpn,
