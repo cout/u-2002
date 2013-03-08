@@ -3,10 +3,20 @@ require 'ostruct'
 
 module Plugins
 
+class Weather
+  alias_method :weather_no_space, :weather
+
+  def weather(m, where)
+    return if where == 'space'
+    return weather_no_space(m, where)
+  end
+end
+
 class SpaceWeather
   include Cinch::Plugin
 
   match /spaceweather/
+  match /weather space/
 
   def execute(m)
     m.reply(space_weather())
