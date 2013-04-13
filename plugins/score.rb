@@ -87,8 +87,6 @@ class Score
       score.sub!(/([+-]){2}/,'\11')
       update_score(nick, score.to_i)
       m.reply "#{nickscore(m.user.nick)} gave #{score} for #{nickscore(nick)}"
-    elsif
-      m.reply "#{nick} is not here"
     end
   end
 
