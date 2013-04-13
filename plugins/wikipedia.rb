@@ -28,9 +28,13 @@ class Wikipedia
   #   file = open(url)
   #   json = file.read
   #   h = JSON.parse(json)
-  #   html = h['parse']['text']['*']
-  #   summary = /<p>(.*)<\/p>/.match(html)[1]
-  #   text = Nokogiri::HTML(summary).text
+  #   if h['error'] then
+  #     return h['error']['info']
+  #   else
+  #     html = h['parse']['text']['*']
+  #     summary = /<p>(.*)<\/p>/.match(html)[1]
+  #     text = Nokogiri::HTML(summary).text
+  #   end
 
   #   return text
   # end
