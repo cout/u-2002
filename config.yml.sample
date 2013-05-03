@@ -1,0 +1,3 @@
+server: localhost
+nick: 'U-2002'
+channels: [ '#alt-255' ]
