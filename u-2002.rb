@@ -1,4 +1,5 @@
 require 'cinch'
+require 'yaml'
 
 require './plugins/console'
 require './plugins/reload'
@@ -24,12 +25,13 @@ class Cinch::Plugins::UrbanDictionary
   set help: "urban <word> - look up <word> in the Urban Dictionary"
 end
 
+config = YAML.load_file('config.yml')
+
 bot = Cinch::Bot.new do
   configure do |c|
-    # c.server = 'irc.freenode.org'
-    c.server = 'localhost'
-    c.nick = 'U-2002'
-    c.channels = [ '#alt-255' ]
+    c.server = config['server']
+    c.nick = config['nick']
+    c.channels = config['channels']
     c.plugins.plugins = [
       Plugins::Console,
       Plugins::Reload,
@@ -49,7 +51,7 @@ bot = Cinch::Bot.new do
       Cinch::Plugins::BasicCTCP,
       Cinch::Plugins::UrbanDictionary,
     ]
-    c.plugins.prefix = '.'
+    c.plugins.prefix = config['prefix'] || '.'
   end
 end
 
