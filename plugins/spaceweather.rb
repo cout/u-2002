@@ -3,14 +3,7 @@ require 'ostruct'
 
 module Plugins
 
-class Weather
-  alias_method :weather_no_space, :weather
-
-  def weather(m, where)
-    return if where == 'space'
-    return weather_no_space(m, where)
-  end
-end
+Weather::IGNORE_PLACES['space'] = true
 
 class SpaceWeather
   include Cinch::Plugin

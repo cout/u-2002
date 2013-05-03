@@ -36,6 +36,8 @@ class Weather
             "I live in <where> - sets your location\n" + \
             "Where do I live / Where does <who> live - tells a user's location"
 
+  IGNORE_PLACES = { }
+
   def initialize(*args)
     super(*args)
     load_locations
@@ -91,6 +93,7 @@ class Weather
   end
 
   def weather(m, where)
+    return if IGNORE_PLACES[where]
     where = find_location(where, m.user.nick)
     m.reply(get_weather(where))
   end
