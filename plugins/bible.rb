@@ -9,7 +9,7 @@ class Bible
 
   match /bible\s+(.*)/
 
-  set help: "bible <book> <chapter>:<verse> [version]"
+  set help: "bible <book> <chapter>:<verse> [ [version] ]"
 
   def execute(m, passage)
     if passage =~ /(.*)\[(.*?)]$/ then
