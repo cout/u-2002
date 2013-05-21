@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 module Plugins
 
 class Eval
@@ -13,12 +15,30 @@ class Eval
     begin
       if expr =~ /^[-+*\/\d\seE.()]*$/ then
         expr.untaint
-        m.reply("Result: #{Kernel::eval(expr)}")
+        m.reply("Result: #{format(Kernel::eval(expr))}")
       else
         raise "bad input"
       end
      rescue Exception => detail
        m.reply("Result: Error (#{$!.message})")
+    end
+  end
+
+  # Quick-and-dirty formatting function that limits the number of characters in the result
+  def format(x)
+    case x
+    when Bignum, BigDecimal
+      f = BigDecimal.new(x)
+      m, e = f.to_s('E').split('E')
+      s = "#{m[0..300]}e#{e}"
+    else
+      s = x.to_s
+    end
+
+    if s.length > 350 then
+      return "#{s}<truncated>"
+    else
+      return s
     end
   end
 end
