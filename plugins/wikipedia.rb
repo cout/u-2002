@@ -50,7 +50,7 @@ class Wikipedia
     if summaries.length == 0 or summaries[0].text == nil then
       return "#{page} not found"
     else
-      summary = Nokogiri::HTML(summaries[0].text).text
+      summary = Nokogiri::HTML(summaries[0].text).text.strip
       return summary
     end
   end
