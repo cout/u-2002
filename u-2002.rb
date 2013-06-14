@@ -2,6 +2,7 @@ require 'cinch'
 require 'yaml'
 
 require './plugins/console'
+require './plugins/console_commands'
 require './plugins/reload'
 require './plugins/help'
 require './plugins/weather'
@@ -35,6 +36,7 @@ bot = Cinch::Bot.new do
     c.channels = config['channels']
     c.plugins.plugins = [
       Plugins::Console,
+      Plugins::ConsoleCommands,
       Plugins::Reload,
       Plugins::Help,
       Plugins::Weather,

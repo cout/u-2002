@@ -5,7 +5,7 @@ class Reload
 
   console_command /reload/
 
-  def execute(m)
+  def execute
     reload_all_plugins
   end
 

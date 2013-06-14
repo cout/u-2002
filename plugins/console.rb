@@ -4,11 +4,12 @@ module Cinch::Plugin
     
     def initialize(h)
       @pattern = h[:pattern]
+      @method = h[:method]
     end
 
     def handle(plugin, line)
-      if line =~ @pattern then
-        plugin.execute(line)
+      if match = line.match(@pattern) then
+        plugin.send(@method, *match.captures)
       end
     end
   end
@@ -29,9 +30,10 @@ module Cinch::Plugin
       end
     end
 
-    def console_command(pattern)
+    def console_command(pattern, method=:execute)
       @console_commands << ConsoleCommand.new(
-          :pattern => pattern)
+          :pattern => pattern,
+          :method  => method)
     end
   end
 
@@ -73,10 +75,14 @@ class Console
 
   def start
     @thread = Thread.new do
-      while not @done and line = $stdin.gets do
-        @commands.each do |plugin, cmd|
-          cmd.handle(plugin, line)
+      begin
+        while not @done and line = $stdin.gets do
+          @commands.each do |plugin, cmd|
+            cmd.handle(plugin, line)
+          end
         end
+      rescue Exception
+        p $!, $!.backtrace
       end
     end
   end
