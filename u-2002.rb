@@ -1,6 +1,8 @@
 require 'cinch'
 require 'yaml'
 
+require './lib/truncate_message'
+
 require './plugins/console'
 require './plugins/console_commands'
 require './plugins/reload'
@@ -25,6 +27,13 @@ require "cinch/plugins/urbandictionary"
 
 class Cinch::Plugins::UrbanDictionary
   set help: "urban <word> - look up <word> in the Urban Dictionary"
+
+  remove_method :execute
+  def execute(m, query)
+    msg = search(query)
+    msg = truncate_message(msg, 3)
+    m.reply(msg)
+  end
 end
 
 config = YAML.load_file('config.yml')
@@ -56,6 +65,7 @@ bot = Cinch::Bot.new do
       Cinch::Plugins::UrbanDictionary,
     ]
     c.plugins.prefix = config['prefix'] || '.'
+    c.max_messages = 3
   end
 end
 

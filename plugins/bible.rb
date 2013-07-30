@@ -30,27 +30,8 @@ class Bible
     text = esv(passage)
     bot.loggers.info "Got: #{text[0..50]}"
 
-    text = truncate(text)
-    m.safe_reply("#{passage}: #{text} (#{version})")
-  end
-
-  def truncate(text)
-    truncated = false
-
-    lines = text.lines.to_a
-    lines.each { |line| line.chomp! }
-    lines.reject { |line| line == "" }
-
-    if lines.count > 3 then
-      lines = lines[0...3]
-      truncated = true
-    end
-
-    if truncated then
-      lines[-1] += ' ...'
-    end
-
-    return lines.join("\n")
+    text = truncate_message(text, 3)
+    m.reply("#{passage}: #{text} (#{version})")
   end
 
   def esv(passage)
