@@ -16,7 +16,7 @@ class Wikipedia
 
   def execute(m, page)
     s = wikipedia_summary(page)
-    m.reply(s)
+    m.safe_reply(s)
   end
 
   # def wikipedia_summary(page)

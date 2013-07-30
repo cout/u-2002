@@ -31,7 +31,7 @@ class Bible
     bot.loggers.info "Got: #{text[0..50]}"
 
     text = truncate(text)
-    m.reply("#{passage}: #{text} (#{version})")
+    m.safe_reply("#{passage}: #{text} (#{version})")
   end
 
   def truncate(text)

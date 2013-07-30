@@ -18,7 +18,7 @@ class Slashtitle
     title = n.xpath('//B').text.strip
     story = n.xpath('//b').text.split("\n")[4]
 
-    m.reply("#{title} - #{story}")
+    m.safe_reply("#{title} - #{story}")
   end
 end
 

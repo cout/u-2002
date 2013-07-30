@@ -17,7 +17,7 @@ class Protolol
 
     joke = n.at_css('.post').at_xpath('text()').text.strip
 
-    m.reply(joke)
+    m.safe_reply(joke)
   end
 end
 

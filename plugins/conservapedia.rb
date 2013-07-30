@@ -15,7 +15,7 @@ class Conservapedia
 
   def execute(m, page)
     s = summary(page)
-    m.reply(s)
+    m.safe_reply(s)
   end
 
   def summary(page)
