@@ -36,15 +36,14 @@ def message_lines(message)
   return lines
 end
 
-def truncate_message(message, max_lines, remove_blanks = true)
+def truncate_message(message, max_lines, remove_blanks = true, &block)
   # Convert the message to individual lines
   lines = message_lines(message)
   truncated = false
 
   # Remove blank lines
   if remove_blanks then
-    lines.each { |line| line.chomp! }
-    lines.reject { |line| line == "" }
+    lines.reject! { |line| line =~ /^\s*$/ }
   end
 
   # Truncate to max_lines number of lines
@@ -55,7 +54,13 @@ def truncate_message(message, max_lines, remove_blanks = true)
 
   # Append ellipsis if we truncated
   if truncated then
-    lines[-1] += ' ...'
+    if block then
+      append = ' '
+      append << block.call
+    else
+      append = ' ...'
+    end
+    lines[-1] += append
   end
 
   # Put the lines back together again

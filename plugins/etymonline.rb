@@ -15,7 +15,7 @@ class Etymonline
     text = etym(term)
     bot.loggers.info "Got: #{text[0..50]}"
 
-    text = truncate_message(text, 3)
+    text = etym(term)
     m.reply(text)
   end
 
@@ -30,8 +30,11 @@ class Etymonline
     lines = result.split("\n")
 
     lines = [ "#{lines[0].strip} - #{lines[1]}" ] + lines[2..-1]
-    p lines
-    return lines.join("\n")
+
+    text = lines.join("\n")
+    text = truncate_message(text, 2) { "... (More at #{url})" }
+
+    return text
   end
 end
 
