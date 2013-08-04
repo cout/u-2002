@@ -20,6 +20,7 @@ require './plugins/conservapedia'
 require './plugins/slashtitle'
 require './plugins/protolol'
 require './plugins/bible'
+require './plugins/etymonline'
 
 require "cinch/plugins/basic_ctcp"
 require "cinch/plugins/yamlscore"
@@ -61,6 +62,7 @@ bot = Cinch::Bot.new do
       Plugins::Slashtitle,
       Plugins::Protolol,
       Plugins::Bible,
+      Plugins::Etymonline,
       Cinch::Plugins::BasicCTCP,
       Cinch::Plugins::UrbanDictionary,
     ]
