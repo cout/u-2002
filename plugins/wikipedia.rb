@@ -13,7 +13,7 @@ class Wikipedia
   match /wp\s+(.*)/, method: :executed_wikipedia_summary
 
   match /dbpedia\s+(.*)/, method: :execute_dbpedia_summary
-  match /db\s+(.*)/, method: :execute_dbpedia_summary
+  match /dbp\s+(.*)/, method: :execute_dbpedia_summary
 
   set help: "wikipedia <page> - display wikipedia summary\n"
             "dbpedia <page> - display dbpedia summary\n"
