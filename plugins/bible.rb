@@ -12,7 +12,7 @@ class Bible
   set help: "bible <book> <chapter>:<verse> [ [version] ]"
 
   def execute(m, passage)
-    if passage =~ /(.*)\[(.*?)]$/ then
+    if passage =~ /(.*)\[(.*?)\]$/ then
       passage = $1
       version = $2
     else
