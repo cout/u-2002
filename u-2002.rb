@@ -21,21 +21,10 @@ require './plugins/slashtitle'
 require './plugins/protolol'
 require './plugins/bible'
 require './plugins/etymonline'
+require './plugins/urban'
 
 require "cinch/plugins/basic_ctcp"
 require "cinch/plugins/yamlscore"
-require "cinch/plugins/urbandictionary"
-
-class Cinch::Plugins::UrbanDictionary
-  set help: "urban <word> - look up <word> in the Urban Dictionary"
-
-  remove_method :execute
-  def execute(m, query)
-    msg = search(query)
-    msg = truncate_message(msg, 3)
-    m.reply(msg)
-  end
-end
 
 config = YAML.load_file('config.yml')
 
@@ -63,8 +52,8 @@ bot = Cinch::Bot.new do
       Plugins::Protolol,
       Plugins::Bible,
       Plugins::Etymonline,
+      Plugins::UrbanDictionary,
       Cinch::Plugins::BasicCTCP,
-      Cinch::Plugins::UrbanDictionary,
     ]
     c.plugins.prefix = config['prefix'] || '.'
     c.max_messages = 3
